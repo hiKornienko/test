@@ -1,10 +1,6 @@
 .form{
   background: #282a3c;
-  padding: 50px 0 100px;
-
-  &__inner{
-    // border-top: 4px solid #babbc0;
-  }
+  padding: 20px 0 50px;
 
   & h2 {
     position: relative;
@@ -14,24 +10,18 @@
     font-size: 30px;
     text-align: center;
     color: white;
-    @media(min-width:768px){
-      font-size: 40px;
-    }
-    @media(min-width:1023px) {
-      font-size: 60px;
-    }
-    @media(min-width:1400px){
-      font-size: 74px;
+    @media(min-width:1024px) {
+      font-size: 50px;
     }
   }
 
   &__input{
     width: 100%;
-    padding:15px 0;
-    @media(min-width:1023px) {
+    padding:10px 0;
+    @media(min-width:1024px) {
       width: 100%;
       margin: 0 auto;
-      padding: 25px 0;
+      padding:10px 0;
     }
 
     & > input{
@@ -41,8 +31,8 @@
       outline:0;
       border-radius:5px;
       padding: 5px 15px;
-      font-size: 24px;
-      line-height: 50px;
+      font-size: 18px;
+      line-height: 30px;
       color: white;
       font-family: 'Gilroy';
 
@@ -61,12 +51,13 @@
 
     & > button{
       text-decoration: none;
-      padding:15px;
+      padding:10px 30px;
       background: #45d8ab;
       color: #13162a;
       border-radius:5px;
-      font-size: 30px;
-      line-height: 40px;
+      font-size: 18px;
+      line-height: 30px;
+
 
       display: block;
       text-align: center;
@@ -74,9 +65,7 @@
       border: 0;
       outline: 0;
       cursor: pointer;
-      @media(min-width:1400px){
-        font-size: 40px;
-      }
+
     }
   }
 }
