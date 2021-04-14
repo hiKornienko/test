@@ -11,10 +11,16 @@
     z-index: 2;
     text-transform: uppercase;
     font-weight: 800;
-    font-size: 40px;
+    font-size: 30px;
     text-align: center;
     color: white;
+    @media(min-width:768px){
+      font-size: 40px;
+    }
     @media(min-width:1023px) {
+      font-size: 60px;
+    }
+    @media(min-width:1400px){
       font-size: 74px;
     }
   }
@@ -59,7 +65,7 @@
       background: #45d8ab;
       color: #13162a;
       border-radius:5px;
-      font-size: 40px;
+      font-size: 30px;
       line-height: 40px;
 
       display: block;
@@ -68,6 +74,9 @@
       border: 0;
       outline: 0;
       cursor: pointer;
+      @media(min-width:1400px){
+        font-size: 40px;
+      }
     }
   }
 }

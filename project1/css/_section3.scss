@@ -1,6 +1,9 @@
 .section3 {
   background: #282a3c;
-  padding: 40px 0;
+  padding: 0;
   position: relative;
   border-bottom: 4px solid #babbc0;
+  @media(min-width:768px){
+    padding: 40px 0;
+  }
 }

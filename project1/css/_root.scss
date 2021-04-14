@@ -10,6 +10,10 @@ body{
   color: white;
   font-weight:600;
   text-transform: uppercase;
+  font-size: calc(14px + (60 - 14) * ((100vw - 300px) / (1920 - 300)));
+  @media(min-width:1920px) {
+    font-size: 60px;
+  }
 }
 
 .container{
