@@ -1,7 +1,8 @@
 .section2 {
-  background: linear-gradient(0.25turn, #28283c,#13162a);
+  background: #282a3c;
   padding: 40px 0;
   position: relative;
+  border-bottom: 4px solid #babbc0;
 
   &:before {
     content: '';
@@ -34,7 +35,6 @@
   &__packages {
     padding: 20px;
     position: relative;
-    border-bottom: 4px solid #babbc0;
 
     @media(min-width:1023px) {
       padding: 30px 40px;
