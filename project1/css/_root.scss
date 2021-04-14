@@ -1,0 +1,20 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family: 'Gilroy';
+  font-size:16px;
+  color: white;
+  font-weight:600;
+  text-transform: uppercase;
+}
+
+.container{
+  width:100%;
+  max-width: 1440px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
