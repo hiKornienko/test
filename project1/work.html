@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="csrf-token" content="TDTvoW5VPfIrIIMhtJDm6gjxGApXrIkJATXEun8J">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/calendar.css">
+</head>
+
+<body style="max-width:1000px; margin:50px auto;">
+
+  <div class="calendar">
+    <!-- calendar header -->
+    <div class="calendar__header">
+      <div class="calendar__title">Календарь</div>
+      <ul class="calendar__menu" data-calendar-type>
+        <li data-calendar-type-param='week' >Неделя</li>
+        <li data-calendar-type-param='month' class="active">Месяц</li>
+        <li class="calendar__menu--add">Добавить событие</li>
+      </ul>
+    </div>
+    <!-- calendar header -->
+
+    <!-- calendar info -->
+    <div class="calendar__info">
+      <div class="calendar__period">
+        <svg data-calendar-period-left class="calendar__period--back" viewBox="0 0 5 9">
+          <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z" />
+        </svg>
+        <div class="calendar__period--date">
+          <span data-calendar-period ></span>
+        </div>
+        <svg data-calendar-period-right class="calendar__period--next" viewBox="0 0 5 9">
+          <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z" />
+        </svg>
+      </div>
+      <ul class="calendar__status">
+        <li class="calendar__status--reminder">Напоминания</li>
+        <li class="calendar__status--task">Задачи</li>
+        <li class="calendar__status--quickly">Срочное</li>
+      </ul>
+    </div>
+    <!-- calendar info -->
+
+    <!-- calendar month -->
+    <div data-calendar-body>
+
+    </div>
+  <!-- calendar month -->
+
+  </div>
+
+  <script src="js/Calendar.js"></script>
+</body>
+
+</html>

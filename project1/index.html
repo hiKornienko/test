@@ -1,249 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/main.min.css">
   <title>Document</title>
+  <link rel="stylesheet" href="css/calendar.css">
+  <meta name="csrf-token" content="TDTvoW5VPfIrIIMhtJDm6gjxGApXrIkJATXEun8J">
 </head>
+<body style="max-width:1000px; margin:50px auto;">
 
-<body>
-  <!-- header -->
-  <header class="header">
-    <div class="container">
-      <div class="logo">
-        <img src="img/logo.png" alt="logo">
-        <span>Fb-gems.io</span>
+<div class="calendar">
+  <!-- calendar header -->
+  <div class="calendar__header">
+    <div class="calendar__title">Календарь</div>
+    <ul class="calendar__menu">
+      <li>Неделя</li>
+      <li>Месяц</li>
+      <li class="calendar__menu--add">Добавить событие</li>
+    </ul>
+  </div>
+  <!-- calendar header -->
+
+  <!-- calendar info -->
+  <div class="calendar__info">
+    <div class="calendar__period">
+      <svg class="calendar__period--back" viewBox="0 0 5 9">
+        <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z" />
+      </svg>
+      <div class="calendar__period--date">
+        <span>10 сентября</span>-<span>17 сентября</span>
       </div>
+      <svg class="calendar__period--next" viewBox="0 0 5 9">
+        <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z" />
+      </svg>
+    </div>
+    <ul class="calendar__status">
+      <li class="calendar__status--reminder">Напоминания</li>
+      <li class="calendar__status--task">Задачи</li>
+      <li class="calendar__status--quickly">Срочное</li>
+    </ul>
+  </div>
+  <!-- calendar info -->
 
-      <div class="header__inner">
-        <div class="header__slogan">
-          <h1>
-            Revive Your Business And Be Back Advertising Within 24 hours
-          </h1>
-          <a href="javascript:void(0)">click here to get set up</a>
+  <!-- calendar week -->
+  <div class="week load">
+
+    <!-- calendar week header -->
+    <div class="week__header">
+      <svg class="week__header--back" viewBox="0 0 5 9">
+        <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z" />
+      </svg>
+      <div class="week__header--day active">Понедельник<span>10</span></div>
+      <div class="week__header--day today">Вторник<span>11</span></div>
+      <div class="week__header--day">Среда<span>12</span></div>
+      <div class="week__header--day">Четверг<span>13</span></div>
+      <div class="week__header--day">Пятница<span>14</span></div>
+      <div class="week__header--day">Суббота<span>15</span></div>
+      <div class="week__header--day">Воскресение<span>16</span></div>
+      <svg class="week__header--next" viewBox="0 0 5 9">
+        <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z" />
+      </svg>
+    </div>
+    <!-- calendar week header -->
+
+    <!-- calendar week time -->
+    <div class="week__time" data-week-time>
+      <div class="week__time--time">08:00</div>
+      <div class="week__day active" data-week-day>
+        <div class="week__item" data-week-status="quickly">
+          <div class="week__item--title">название название название название</div>
+          <div class="week__item--time">
+            <span>08:00</span>-<span>10:30</span>
+          </div>
+          <div class="week__item--location">
+            <span class="week__item--location--icon"></span>
+            <span>Киев, Оболонь</span>
+          </div>
+          <div class="week__item--users">
+            <div class="week__item--users--count">+10</div>
+            <img src="img/user.png" alt="user">
+            <img src="img/user.png" alt="user">
+          </div>
         </div>
+      </div>
+      <div class="week__day" data-week-day>
+        <div class="week__item" data-week-status="quickly">
+          <div class="week__item--title">название название название название</div>
+          <div class="week__item--time">
+            <span>08:00</span>-<span>10:30</span>
+          </div>
+          <div class="week__item--location">
+            <span class="week__item--location--icon"></span>
+            <span>Киев, Оболонь</span>
+          </div>
+          <div class="week__item--users">
+            <div class="week__item--users--count">+10</div>
+            <img src="img/user.png" alt="user">
+            <img src="img/user.png" alt="user">
+          </div>
+        </div>
+        <div class="week__item" data-week-status="task">
+          <div class="week__item--title">название название название название</div>
+          <div class="week__item--time">
+            <span>08:00</span>-<span>10:30</span>
+          </div>
+          <div class="week__item--location">
+            <span class="week__item--location--icon"></span>
+            <span>Киев, Оболонь</span>
+          </div>
+          <div class="week__item--users">
+            <div class="week__item--users--count">+10</div>
+            <img src="img/user.png" alt="user">
+            <img src="img/user.png" alt="user">
+          </div>
+        </div>
+      </div>
+      <div class="week__day" data-week-day>
 
-        <div class="header__list">
-          <ul>
-            <li>
-              <img src="img/checkbox.png" alt="icon">
-              <span>
-                Aged Accounts 10+ years
-              </span>
-            </li>
-            <li>
-              <img src="img/checkbox.png" alt="icon">
-              <span>
-                Warmed US Registered IP’s
-              </span>
-            </li>
-            <li>
-              <img src="img/checkbox.png" alt="icon">
-              <span>
-                Work From Anywhere
-              </span>
-            </li>
-            <li>
-              <img src="img/checkbox.png" alt="icon">
-              <span>
-                Client Software With Browsing History
-              </span>
-            </li>
-            <li>
-              <img src="img/checkbox.png" alt="icon">
-              <span>
-                Tested formula – $100M+ adspend via our accounts
-              </span>
-            </li>
-          </ul>
-          <img src="img/item1.svg" alt="svg">
-          <img src="img/item2.svg" alt="svg">
-          <img src="img/item3.svg" alt="svg">
-          <img src="img/item4.svg" alt="svg">
-          <img src="img/item5.svg" alt="svg">
+      </div>
+      <div class="week__day" data-week-day>
+        <div class="week__item" data-week-status="task">
+          <div class="week__item--title">название название название название</div>
+          <div class="week__item--time">
+            <span>08:00</span>-<span>10:30</span>
+          </div>
+          <div class="week__item--location">
+            <span class="week__item--location--icon"></span>
+            <span>Киев, Оболонь</span>
+          </div>
+          <div class="week__item--users">
+            <div class="week__item--users--count">+10</div>
+            <img src="img/user.png" alt="user">
+            <img src="img/user.png" alt="user">
+          </div>
+        </div>
+      </div>
+      <div class="week__day" data-week-day>
+
+      </div>
+      <div class="week__day" data-week-day>
+
+      </div>
+      <div class="week__day" data-week-day>
+
+      </div>
+    </div>
+    
+
+    <div class="week__time" data-week-time>
+      <div class="week__time--time">12:00</div>
+      <div class="week__day active" data-week-day>
+        <div class="week__item" data-week-status="reminder">
+          <div class="week__item--title">название название </div>
+          <div class="week__item--time">
+            <span>08:00</span>-<span>10:30</span>
+          </div>
+          <div class="week__item--location">
+            <span class="week__item--location--icon"></span>
+            <span>Киев, Оболонь</span>
+          </div>
+          <div class="week__item--users">
+            <div class="week__item--users--count">+10</div>
+            <img src="img/user.png" alt="user">
+            <img src="img/user.png" alt="user">
+          </div>
+        </div>
+      </div>
+      <div class="week__day" data-week-day>
+        <div class="week__item" data-week-status="task">
+          <div class="week__item--title">название название название название</div>
+          <div class="week__item--time">
+            <span>08:00</span>-<span>10:30</span>
+          </div>
+          <div class="week__item--location">
+            <span class="week__item--location--icon"></span>
+            <span>Киев, Оболонь</span>
+          </div>
+          <div class="week__item--users">
+            <div class="week__item--users--count">+10</div>
+            <img src="img/user.png" alt="user">
+            <img src="img/user.png" alt="user">
+          </div>
+        </div>
+      </div>
+      <div class="week__day" data-week-day>
+
+      </div>
+      <div class="week__day" data-week-day>
+
+      </div>
+      <div class="week__day" data-week-day>
+        <div class="week__item" data-week-status="quickly">
+          <div class="week__item--title">название название название название</div>
+          <div class="week__item--time">
+            <span>08:00</span>-<span>10:30</span>
+          </div>
+          <div class="week__item--location">
+            <span class="week__item--location--icon"></span>
+            <span>Киев, Оболонь</span>
+          </div>
+          <div class="week__item--users">
+            <div class="week__item--users--count">+10</div>
+            <img src="img/user.png" alt="user">
+            <img src="img/user.png" alt="user">
+          </div>
+        </div>
+      </div>
+      <div class="week__day" data-week-day>
+
+      </div>
+      <div class="week__day" data-week-day>
+        <div class="week__item" data-week-status="task">
+          <div class="week__item--title">название название название название</div>
+          <div class="week__item--time">
+            <span>08:00</span>-<span>10:30</span>
+          </div>
+          <div class="week__item--location">
+            <span class="week__item--location--icon"></span>
+            <span>Киев, Оболонь</span>
+          </div>
+          <div class="week__item--users">
+            <div class="week__item--users--count">+10</div>
+            <img src="img/user.png" alt="user">
+            <img src="img/user.png" alt="user">
+          </div>
         </div>
       </div>
     </div>
-  </header>
-  <!-- header -->
 
-  <!-- section1 -->
-  <section class="section1">
-    <div class="container">
-      <h2>Why do I need this?</h2>
-      <div class="section1__inner">
-        <div class="section1__text">
-          <p>From Ad account bans, business manager bans or even profile bans… It’s not IF it’s WHEN. </p>
-          <p>All advertisers using the Facebook platform are facing these same problems. From small stores to huge brands spending 7+ figures a month.</p>
-          <p>We provide a solution to this problem so you can get back to making money as quickly as possible.</p>
+    <!-- calendar week time -->
+  </div>
+  <!-- calendar week -->
+
+  <!-- calendar week event -->
+  <div class="calendar__event load">
+    <div class="calendar__event__inner">
+      <div class="calendar__event__form">
+        <input type="text" placeholder="Название события">
+        <select>
+          <option>Срочное</option>
+          <option>Напоминание</option>
+          <option>Задача</option>
+        </select>
+        <input type="time">
+        <input type="time">
+        <input type="date">
+        <input type="text" placeholder="Локация">
+        <textarea placeholder="Детали"></textarea>
+        <div class="calendar__event__form--user">
+          <img src="img/user.png" alt="user">
+          <img src="img/user.png" alt="user">
+          <span>Смотреть всех</span>
         </div>
-        <div class="section1__img">
-          <img src="img/img.png" alt="image">
-        </div>
+       <div class="calendar__event__form--submit">Сохранить</div>
       </div>
     </div>
-  </section>
-  <!-- section1 -->
+  </div>
+  <!-- calendar week event -->
 
-  <!-- section2 -->
-  <section class="section2">
-    <h2>pricing</h2>
-    <div class="container">
-      <div class="section2__packages">
-        <div class="section2__package">
-          <div class="section2__package--title">startup package</div>
-          <div class="section2__package--price">$299</div>
-          <ul class="section2__package--list">
-            <li>1 x US Profile</li>
-            <li>2 x Bissiness Manager</li>
-            <li>Account aged 10+ Years</li>
-          </ul>
-          <div class="section2__package--link">
-            <a href="javascript:void(0)">get package</a>
-          </div>
-        </div>
+</div>
 
-        <div class="section2__package">
-          <div class="section2__package--title">enterprise package</div>
-          <div class="section2__package--price">$499</div>
-          <ul class="section2__package--list">
-            <li>1 x US Profile</li>
-            <li>2 x Bissiness Manager</li>
-            <li>Account aged 10+ Years</li>
-          </ul>
-          <div class="section2__package--link">
-            <a href="javascript:void(0)">get package</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-  <!-- section2 -->
-
-  <!-- section3 -->
-  <section class="section3">
-    <div class="container">
-      <div class="table">
-        <div class="row">
-          <div class="td"></div>
-          <div class="td">dont farm</div>
-          <div class="td">farm</div>
-          <div class="td">pva</div>
-          <div class="td">softreg</div>
-        </div>
-        <div class="row blue">
-          <div class="td">price per acc</div>
-          <div class="td">from $149</div>
-          <div class="td">~$30</div>
-          <div class="td">~$5</div>
-          <div class="td">~$1</div>
-        </div>
-        <div class="row">
-          <div class="td">comes with proxy</div>
-          <div class="td"><img src="img/plus.png" alt="good"></div>
-          <div class="td"><img src="img/minus.png" alt="bad"></div>
-          <div class="td"><img src="img/minus.png" alt="bad"></div>
-          <div class="td"><img src="img/minus.png" alt="bad"></div>
-        </div>
-        <div class="row">
-          <div class="td">comes with browser</div>
-          <div class="td"><img src="img/plus.png" alt="good"></div>
-          <div class="td"><img src="img/minus.png" alt="bad"></div>
-          <div class="td"><img src="img/minus.png" alt="bad"></div>
-          <div class="td"><img src="img/minus.png" alt="bad"></div>
-        </div>
-        <div class="row">
-          <div class="td">warmed-up</div>
-          <div class="td"><img src="img/plus.png" alt="good"></div>
-          <div class="td"><img src="img/minus.png" alt="bad"></div>
-          <div class="td"><img src="img/minus.png" alt="bad"></div>
-          <div class="td"><img src="img/minus.png" alt="bad"></div>
-        </div>
-      </div>
-
-      <div class="section2__btn">
-        <a href="javascript:void(0)">learn more</a>
-      </div>
-
-    </div>
-  </section>
-  <!-- section3 -->
-
-  <!-- form -->
-  <section class="form">
-    <form action="send.php">
-      <div class="container">
-        <div class="form__inner">
-          <h2>Still got a Question? Let us know and We'll get back to you</h2>
-          <div class="form__input">
-            <input type="text" id="name" name="name" required placeholder="Full Name *">
-          </div>
-
-          <div class="form__input">
-            <input type="email" id="email" name="email" required placeholder="Your Email *">
-          </div>
-
-          <div class="form__input">
-            <input type="text" id="text" name="text" required placeholder="Your Question *">
-          </div>
-
-          <div class="form__submit">
-            <button type="submit">Send</button>
-          </div>
-        </div>
-      </div>
-    </form>
-  </section>
-  <!-- form -->
-
-
-  <!-- footer -->
-  <footer class="footer">
-    <div class="container">
-      <h2>reviews</h2>
-      <div class="reviews">
-        <div class="reviews__img">
-          <img src="img/1.png" alt="image">
-        </div>
-        <div class="reviews__img">
-          <img src="img/2.png" alt="image">
-        </div>
-      </div>
-
-      <div class="footer__nav">
-        <ul class="footer__menu">
-          <li><a href="javascript:void(0)">Adresses</a></li>
-          <li><a href="javascript:void(0)">Contact us</a></li>
-          <li><a href="javascript:void(0)">Privacy Policy</a></li>
-          <li><a href="javascript:void(0)">Terms of use</a></li>
-        </ul>
-
-        <ul class="footer__social">
-          <li><a href="javascript:void(0)">
-              <img src="img/ink.png" alt="ink">
-            </a></li>
-          <li><a href="javascript:void(0)">
-              <img src="img/vk.png" alt="ink">
-            </a></li>
-          <li><a href="javascript:void(0)">
-              <img src="img/fb.png" alt="ink">
-            </a></li>
-          <li><a href="javascript:void(0)">
-              <img src="img/zen.png" alt="ink">
-            </a></li>
-        </ul>
-      </div>
-
-      <div class="footer__partner">
-        <img src="img/partner.png" alt="image">
-      </div>
-    </div>
-  </footer>
-  <!-- footer -->
+<script src="js/Calendar.js"></script>
 </body>
-
 </html>
