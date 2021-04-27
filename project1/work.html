@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="csrf-token" content="TDTvoW5VPfIrIIMhtJDm6gjxGApXrIkJATXEun8J">
   <title>Document</title>
+  <link rel="stylesheet" href="css/picker.min.css">
   <link rel="stylesheet" href="css/calendar.css">
 </head>
 
@@ -45,15 +46,72 @@
     </div>
     <!-- calendar info -->
 
-    <!-- calendar month -->
-    <div data-calendar-body>
-
-    </div>
-  <!-- calendar month -->
-
+    <!-- calendar body -->
+    <div data-calendar-body></div>
+  <!-- calendar body -->
   </div>
 
-  <script src="js/Calendar.js"></script>
+  <!-- calendar week event -->
+  <div class="calendar__event load" data-calendar-info>
+    <div class="calendar__event__inner">
+      <ul class="calendar__event__result">
+        <li data-calendar-info-title >Название события</li>
+        <li>Статус: <span data-calendar-info-type >Срочное</span></li>
+        <li>Дата и время: <span data-calendar-info-date >22.11.2020 10:00 - 12:00</span></li>
+        <li>Локация: <span data-calendar-info-location >Встреча в zoom</span></li>
+        <li>Детали: <span data-calendar-info-desc >Описание события, любой текст текст текс текст</span></li>
+        <li>Пользователи: <span data-calendar-info-users >user1, user2, user3, user4, user5, user10</span></li>
+      </ul>
+    </div>
+  </div>
+  <!-- calendar week event -->
+
+  <!-- calendar week event -->
+  <div class="calendar__event load" data-calendar-edit>
+    <div class="calendar__event__inner">
+      <form class="calendar__event__form">
+        <input type="hidden" data-calendar-edit-id name="id">
+        <input type="text" placeholder="Название события" data-calendar-edit-title name="title">
+        <select data-calendar-edit-select name="type">
+          <option value="quickly">Срочное</option>
+          <option value="reminder" >Напоминание</option>
+          <option value="task" >Задача</option>
+        </select>
+        <div class="calendar__event__form--time">
+          <input type="text" placeholder="Начало" data-calendar-edit-picker-start>
+          <input type="text" placeholder="Конец" data-calendar-edit-picker-end>
+          <input type="text" placeholder="Дата" data-calendar-edit-picker>
+        </div>
+        <input type="text" placeholder="Локация" data-calendar-edit-lcation name="location">
+        <textarea placeholder="Детали" data-calendar-edit-desc name="description"></textarea>
+
+        <div class="calendar__event__form--search">
+          <input list="editUsers" placeholder="Найти пользователя">
+            <datalist id="editUsers">
+              <option value="ivan #id1">
+              <option value="vlad #id">
+              <option value="margo #id3">
+              <option value="petya #id4">
+              <option value="nikita #id5">
+            </datalist>
+          <div class="calendar__event__form--submit" data-calendar-edit-add-user>Добавить</div>
+        </div>
+
+        <ul class="calendar__event__form--users">
+          <li>petya <span data-calendar-edit-delet-user="4">Удалить</span></li>
+          <li>ivan <span data-calendar-edit-delet-user="1">Удалить</span></li>
+          <li>nikita <span data-calendar-edit-delet-user="4">Удалить</span></li>
+        </ul>
+
+        <div class="calendar__event__form--submit" data-calendar-edit-send>Сохранить</div>
+        <div class="calendar__event__form--submit" data-calendar-edit-delete>Удалить</div>
+      </form>
+    </div>
+  </div>
+  <!-- calendar week event -->
+
+  <script src="js/picker.min.js"></script>
+  <script src="js/calendar.js"></script>
 </body>
 
 </html>

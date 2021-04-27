@@ -103,6 +103,7 @@
       & span{
         position: absolute;
         left: 2px;
+        pointer-events: none;
       }
 
       &[data-week-status="reminder"]{

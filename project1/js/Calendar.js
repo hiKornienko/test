@@ -28,6 +28,30 @@ class Calendar {
     this.el.typeButton = document.querySelector('[data-calendar-type]');
     this.el.body = document.querySelector('[data-calendar-body]');
 
+    this.el.info = document.querySelector('[data-calendar-info]');
+    this.el.infoTitle = document.querySelector('[data-calendar-info-title]');
+    this.el.infoType = document.querySelector('[data-calendar-info-type]');
+    this.el.infoDate = document.querySelector('[data-calendar-info-date]');
+    this.el.infoLocation = document.querySelector('[data-calendar-info-location]');
+    this.el.infoDesc = document.querySelector('[data-calendar-info-desc]');
+    this.el.infoUsers = document.querySelector('[data-calendar-info-users]');
+
+    this.el.edit = document.querySelector('[data-calendar-edit]');
+    this.el.editId = document.querySelector('[data-calendar-edit-id]');
+    this.el.editTitle = document.querySelector('[data-calendar-edit-title]');
+    this.el.editSelect = document.querySelector('[data-calendar-edit-select]');
+    this.el.editLocation = document.querySelector('[data-calendar-edit-lcation]');
+    this.el.editDesc = document.querySelector('[data-calendar-edit-desc]');
+    this.el.editUser = document.querySelector('[data-calendar-edit-user]');
+    this.el.editUserList = document.querySelector('[data-calendar-edit-user-list]');
+    this.el.editSend = document.querySelector('[data-calendar-edit-user-send]');
+    this.el.editDelete = document.querySelector('[data-calendar-edit-user-delete]');
+
+    this.el.editPicker = document.querySelector('[data-calendar-edit-picker]');
+    this.el.editPickerStart = document.querySelector('[data-calendar-edit-picker-start]');
+    this.el.editPickerEnd = document.querySelector('[data-calendar-edit-picker-end]');
+
+
     this.run();
   }
 
@@ -41,13 +65,25 @@ class Calendar {
     this.el.periodLeft.addEventListener('click', () => this.render('left'));
     this.el.periodRight.addEventListener('click', () => this.render('right'));
     this.el.typeButton.addEventListener('click', this.eventType.bind(this));
+    this.el.info.addEventListener('click', this.eventModal.bind(this));
+    this.el.edit.addEventListener('click', this.eventModal.bind(this));
   }
 
   render(event) {
+    this.swichClass();
+
     if (!event) {
       this.date = new Date(new Date().getTime());
       this.daySize = 24 * 60 * 60 * 1000;
     }
+
+    const allId = document.querySelectorAll('[data-calendar-event-id]');
+    if (allId.length > 0) {
+      allId.forEach((el) => {
+        el.removeEventListener('click', this.eventId);
+      })
+    }
+
 
     if (this.type === 'month') {
       if (event === 'left') {
@@ -73,8 +109,6 @@ class Calendar {
   }
 
   renderMonth() {
-    this.swichClass(true);
-
     this.month = {};
     this.month.days = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0).getDate();
     this.month.prefix = new Date(this.date.getFullYear(), this.date.getMonth(), 0).getDay();
@@ -127,7 +161,6 @@ class Calendar {
   }
 
   renderWeek() {
-    this.swichClass();
 
     this.week = {};
 
@@ -183,8 +216,8 @@ class Calendar {
     this.el.weekPeriodRight.addEventListener('click', this.eventWeekPeriod);
 
     this.el.period.innerHTML = `
-        ${new Date(this.week.mondey).getDate()}.${('0' + (new Date(this.week.mondey).getMonth() + 1)).slice(-2)}.${new Date(this.week.mondey).getFullYear()} -
-        ${new Date(this.week.sunday).getDate()}.${('0' + (new Date(this.week.sunday).getMonth() + 1)).slice(-2)}.${new Date(this.week.sunday).getFullYear()}
+        ${('0' + (new Date(this.week.mondey).getDate())).slice(-2)}.${('0' + (new Date(this.week.mondey).getMonth() + 1)).slice(-2)}.${new Date(this.week.mondey).getFullYear()} -
+        ${('0' + (new Date(this.week.sunday).getDate())).slice(-2)}.${('0' + (new Date(this.week.sunday).getMonth() + 1)).slice(-2)}.${new Date(this.week.sunday).getFullYear()}
       `;
 
     if (checkToday === '') {
@@ -216,7 +249,6 @@ class Calendar {
     allInfo.forEach((el, i) => {
       if (el.classList.contains('active') && el.classList.contains('today')) {
         allDays.forEach((time) => {
-          console.log(time[i])
           time[i].classList.add('active');
         })
       }
@@ -273,22 +305,25 @@ class Calendar {
   }
 
   eventType(event) {
-    const all = this.el.typeButton.querySelectorAll('[data-calendar-type-param]');
-
-    all.forEach((item) => {
-      item.classList.remove('active');
-    });
-
-    event.target.classList.add('active');
-
-    this.type = event.target.dataset.calendarTypeParam;
-
     if (this.el.weekPeriodLeft !== undefined && this.el.weekPeriodRight !== undefined) {
       this.el.weekPeriodLeft.removeEventListener('click', this.eventWeekPeriod);
       this.el.weekPeriodRight.removeEventListener('click', this.eventWeekPeriod);
-    }
+    };
 
-    this.render();
+    if (event.target.dataset.calendarTypeParam === "week" || event.target.dataset.calendarTypeParam === "month") {
+      const all = this.el.typeButton.querySelectorAll('[data-calendar-type-param]');
+
+      all.forEach((item) => {
+        item.classList.remove('active');
+      });
+
+      event.target.classList.add('active');
+      this.type = event.target.dataset.calendarTypeParam;
+
+      this.render();
+    } else {
+      this.eventCreate();
+    };
   }
 
   timeZone(utc, inv = false) {
@@ -342,16 +377,18 @@ class Calendar {
     response.then((result) => {
       if (result.status === true) {
         if (this.type === "month") {
+          this.data = result.data;
           this.renderEventMonth(result.data)
         } else {
+          this.data = result.data;
           this.renderEventWeek(result.data)
         }
       }
     })
   }
 
-  renderEventMonth(data) {
-    if (data.length === 0) {
+  renderEventMonth() {
+    if (this.data.length === 0) {
       this.swichClass(true);
       return
     }
@@ -361,28 +398,34 @@ class Calendar {
     all.forEach((item) => {
       const itemDate = new Date(Number(item.dataset.calendarEventBody));
 
-      let search = this.renderEventSearch(data, itemDate.getDate(), itemDate.getMonth());
+      let search = this.renderEventSearch(this.data, itemDate.getDate(), itemDate.getMonth());
 
       if (search.length === 0) return
 
       search.forEach((event) => {
         item.innerHTML += `
-          <div class="month__day--event" data-week-status="${event.type}">
+          <div class="month__day--event" data-week-status="${event.type}" data-calendar-event-id="${event.id}">
             <span>${event.title}</span>
             </div>
         `;
       })
     })
-    console.log(data)
+
+    const allId = document.querySelectorAll('[data-calendar-event-id]');
+    allId.forEach((el) => {
+      el.addEventListener('click', this.eventId.bind(this));
+    })
+
+    this.swichClass(true);
   }
 
-  renderEventWeek(data) {
-    if (data.length === 0) {
+  renderEventWeek() {
+    if (this.data.length === 0) {
       this.swichClass(true);
       return
     }
 
-    let time = data.map(el => el.time_start);
+    let time = this.data.map(el => el.time_start);
     time = [...new Set(time)];
 
     let timeLine = time.map((el) => {
@@ -405,14 +448,14 @@ class Calendar {
     });
 
 
-    data.forEach((el) => {
+    this.data.forEach((el) => {
       let myCheckTimeLine = `${('0' + new Date(el.time_start).getHours()).slice(-2)}:${('0' + new Date(el.time_start).getMinutes()).slice(-2)}`;
       let weekIndex = new Date(el.time_start).getDay();
       const elTime = document.querySelector('[data-calendar-week-time="' + myCheckTimeLine + '"]');
       const elTimeIndex = elTime.querySelector('[data-calendar-week-time-day="' + (weekIndex === 0 ? 7 : weekIndex) + '"]');
 
       let html = `
-          <div class="week__item" data-week-status="${el.type}">
+          <div class="week__item" data-week-status="${el.type}" data-calendar-event-id="${el.id}">
             <div class="week__item--title">${el.title}</div>
             <div class="week__item--time">
               <span>${myCheckTimeLine}</span> - <span>${('0' + new Date(el.time_end).getHours()).slice(-2)}:${('0' + new Date(el.time_end).getMinutes()).slice(-2)}</span>
@@ -431,6 +474,12 @@ class Calendar {
     })
 
     this.eventWeekPeriod();
+
+    const allId = document.querySelectorAll('[data-calendar-event-id]');
+    allId.forEach((el) => {
+      el.addEventListener('click', this.eventId.bind(this));
+    })
+
     this.swichClass(true);
   }
 
@@ -445,12 +494,119 @@ class Calendar {
     return result
   }
 
+  eventModal(e) {
+    if (e.target.dataset.calendarInfo !== undefined) {
+      e.target.classList.remove('active');
+    }
+
+    if (e.target.dataset.calendarEdit !== undefined) {
+      e.target.classList.remove('active');
+    }
+  }
+
+  eventId(e) {
+    this.data.forEach((el) => {
+      if (Number(e.target.dataset.calendarEventId) === el.id) {
+        if (el.autor === false) {
+          this.eventInfo(el)
+          this.el.info.classList.add('active');
+        } else {
+          this.eventEdit(el);
+          this.el.edit.classList.add('active');
+        }
+      }
+    })
+  }
+
+  eventInfo(data) {
+    const time = new Date(data.time_start);
+    const timeEnd = new Date(data.time_end);
+    this.el.infoTitle.innerHTML = data.title;
+    this.el.infoType.innerHTML = data.type;
+    this.el.infoDate.innerHTML = `${('0' + time.getDate()).slice(-2)}.${('0' + time.getMonth()).slice(-2)}.${time.getFullYear()} ${('0' + time.getHours()).slice(-2)}:${('0' + time.getMinutes()).slice(-2)} - ${('0' + timeEnd.getHours()).slice(-2)}:${('0' + timeEnd.getMinutes()).slice(-2)} `;
+    this.el.infoLocation.innerHTML = data.location;
+    this.el.infoDesc.innerHTML = data.description;
+
+    this.el.infoUsers.innerHTML = '';
+    data.users.forEach((user) => {
+      this.el.infoUsers.innerHTML += `${user.name} `;
+    })
+  }
+
+  eventEdit(data) {
+    this.el.editId.value = data.id;
+    this.el.editTitle.value = data.title;
+    this.el.editLocation.value = data.location;
+    this.el.editDesc.value = data.description;
+
+    for (const option of this.el.editSelect.options) {
+      if (option.value === data.type) {
+        option.selected = true;
+      }
+    }
+
+    this.pickerPlugin(data.time_start, data.time_end, this.el.editPicker, this.el.editPickerStart, this.el.editPickerEnd);
+
+
+    // this.el.edit = document.querySelector('[data-calendar-edit]');
+    // this.el.editId = document.querySelector('[data-calendar-edit-id]');
+    // this.el.editTitle = document.querySelector('[data-calendar-edit-title]');
+    // this.el.editSelect = document.querySelector('[data-calendar-edit-select]');
+    // this.el.editDate = document.querySelector('[data-calendar-edit-date]');
+    // this.el.editDateStart = document.querySelector('[data-calendar-edit-date-start]');
+    // this.el.editDateEnd = document.querySelector('[data-calendar-edit-date-end]');
+    // this.el.editLocation = document.querySelector('[data-calendar-edit-lcation]');
+    // this.el.editDesc = document.querySelector('[data-calendar-edit-desc]');
+    // this.el.editUser = document.querySelector('[data-calendar-edit-user]');
+    // this.el.editUserList = document.querySelector('[data-calendar-edit-user-list]');
+    // this.el.editSend = document.querySelector('[data-calendar-edit-user-send]');
+    // this.el.editDelete = document.querySelector('[data-calendar-edit-user-delete]');
+  }
+
+  eventCreate(e) {
+    this.el.create.classList.add('active');
+  }
+
+  pickerPlugin(start, end, el, elStart, elEnd) {
+    console.log(start, end, el, elStart, elEnd)
+    if (this.picker && this.pickerStart && this.pickerEnd) {
+      this.picker.destroy();
+      this.pickerStart.destroy();
+      this.pickerEnd.destroy();
+    }
+
+    this.picker = new Picker(el, {
+      format: 'DD.MM.YYYY',
+      headers: 'Date',
+    });
+
+    this.pickerStart = new Picker(elStart, {
+      format: 'HH:mm',
+      headers: 'Start',
+    });
+
+    this.pickerEnd = new Picker(elEnd, {
+      format: 'HH:mm',
+      headers: 'End',
+    });
+
+    if (start && end) {
+      this.picker.setDate(new Date(start));
+      this.pickerStart.setDate(new Date(start));
+      this.pickerEnd.setDate(new Date(end));
+
+      el.value = `${('0' + (new Date(start).getDate())).slice(-2)}.${('0' + (new Date(start).getMonth() + 1)).slice(-2)}.${new Date(start).getFullYear()}`;
+      elStart.value = `${('0' + new Date(start).getHours()).slice(-2)}:${('0' + new Date(start).getMinutes()).slice(-2)}`;
+      elEnd.value = `${('0' + new Date(end).getHours()).slice(-2)}:${('0' + new Date(end).getMinutes()).slice(-2)}`;
+    }
+  }
+
+  userList(){
+    
+  }
+
 }
 
-
-/*
- *  new Calendar
- */
 
 const lang = {};
 lang.monthName = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
@@ -463,7 +619,25 @@ server.getEvent = 'event.html';
 server.createEvent = 'event.html';
 server.token = document.querySelector('[name="csrf-token"]').content;
 
-const calendar = new Calendar('week', lang, server);
+const calendar = new Calendar('month', lang, server);
 calendar.init();
+
+
+// new Picker(document.querySelector('#timeDate'), {
+//   format: 'DD.MM.YYYY',
+//   headers: true,
+// });
+//
+// new Picker(document.querySelector('#timeStart'), {
+//   format: 'HH:mm',
+//   headers: true,
+// });
+//
+// new Picker(document.querySelector('#timeEnd'), {
+//   format: 'HH:mm',
+//   headers: true,
+// });
+
+
 
 console.log(calendar)
